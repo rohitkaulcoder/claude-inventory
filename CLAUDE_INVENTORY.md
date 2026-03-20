@@ -156,7 +156,7 @@ All skills are Readwise-focused and gitignored by default:
   - Local inventory: `/Users/rohitkaul/CLAUDE_INVENTORY.md`
   - Sync script: `/Users/rohitkaul/sync_inventory.sh`
   - LaunchAgent: `com.rohitkaul.inventory-sync`
-  - Schedule: Hourly sync to GitHub
+  - Schedule: Daily sync to GitHub
 - **Documentation:** `~/INVENTORY_SYNC_GUIDE.md`
 
 ---
@@ -224,7 +224,7 @@ All automation shell scripts are in home directory (`~/`):
 - `com.rohitkaul.podcastfetch.plist` - Simple fetch (legacy)
 
 ### System Maintenance
-- `com.rohitkaul.inventory-sync.plist` - Auto-sync inventory to GitHub (hourly)
+- `com.rohitkaul.inventory-sync.plist` - Auto-sync inventory to GitHub (daily)
 
 ### Management Commands
 ```bash
