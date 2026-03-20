@@ -146,11 +146,25 @@ All skills are Readwise-focused and gitignored by default:
   - `~/Projects/podcast-digest/README.md`
   - `~/Projects/podcast-digest/SETUP.md`
 
+### 4. Inventory Sync System
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/claude-inventory/`
+- **GitHub:** https://github.com/rohitkaulcoder/claude-inventory
+- **Type:** System documentation & auto-sync
+- **Purpose:** Central registry of all Claude-built systems with automatic GitHub sync
+- **Components:**
+  - Local inventory: `/Users/rohitkaul/CLAUDE_INVENTORY.md`
+  - Sync script: `/Users/rohitkaul/sync_inventory.sh`
+  - LaunchAgent: `com.rohitkaul.inventory-sync`
+  - Schedule: Hourly sync to GitHub
+- **Documentation:** `~/INVENTORY_SYNC_GUIDE.md`
+
 ---
 
 ## Documentation
 
 ### Primary Guides (Home Directory)
+- `INVENTORY_SYNC_GUIDE.md` - Inventory system setup and usage
 - `AUTOMATION_GUIDE.md` - Overall automation system guide
 - `CRON_JOBS_STATUS.md` - Status of scheduled jobs
 - `MONITORING_GUIDE.md` - How to monitor automations
@@ -208,6 +222,9 @@ All automation shell scripts are in home directory (`~/`):
 - `com.rohitkaul.podcast-health-check.plist` - Health monitoring
 - `com.rohitkaul.podcast-full-automation.plist` - Full pipeline (legacy)
 - `com.rohitkaul.podcastfetch.plist` - Simple fetch (legacy)
+
+### System Maintenance
+- `com.rohitkaul.inventory-sync.plist` - Auto-sync inventory to GitHub (hourly)
 
 ### Management Commands
 ```bash
