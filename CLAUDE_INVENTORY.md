@@ -107,16 +107,17 @@
 
 All skills are Readwise-focused and gitignored by default:
 
-1. **book-review** - Draft long-form book reviews from Reader highlights
-2. **build-persona** - Build personalized reading profile from Reader data
-3. **feed-catchup** - Catch up on RSS feed with highlights
-4. **highlight-graph** - Visualize highlights in interactive 2D graph
-5. **now-reading-page** - Generate personal "Now Reading" webpage
-6. **quiz** - Quiz yourself on recently read documents
-7. **reader-recap** - Conversational briefing on recent reading
-8. **readwise-cli** - How to use Readwise CLI
-9. **surprise-me** - Analyze reading history for surprising insights
-10. **triage** - Triage Reader inbox with personalized pitches
+1. **reader-daily-digest** ⭐ NEW - Generate daily digest of inbox with deep insights and quotes (Discord-accessible)
+2. **book-review** - Draft long-form book reviews from Reader highlights
+3. **build-persona** - Build personalized reading profile from Reader data
+4. **feed-catchup** - Catch up on RSS feed with highlights
+5. **highlight-graph** - Visualize highlights in interactive 2D graph
+6. **now-reading-page** - Generate personal "Now Reading" webpage
+7. **quiz** - Quiz yourself on recently read documents
+8. **reader-recap** - Conversational briefing on recent reading
+9. **readwise-cli** - How to use Readwise CLI
+10. **surprise-me** - Analyze reading history for surprising insights
+11. **triage** - Triage Reader inbox with personalized pitches
 
 ---
 
@@ -158,6 +159,26 @@ All skills are Readwise-focused and gitignored by default:
   - LaunchAgent: `com.rohitkaul.inventory-sync`
   - Schedule: Daily at 9:00 AM (catches up at startup if laptop was off)
 - **Documentation:** `~/INVENTORY_SYNC_GUIDE.md`
+
+### 5. Discord Bot Integration
+- **Status:** ✅ Working
+- **Type:** Claude Code Channel Plugin
+- **Purpose:** Trigger Claude Code skills from Discord (phone or desktop)
+- **Bot Name:** claude_app
+- **Setup Date:** 2026-03-20
+- **Requirements:**
+  - Claude Code v2.1.80+ ✅
+  - Bun runtime v1.3.11 ✅
+  - Discord bot token (configured)
+- **Features:**
+  - Trigger skills via DM (e.g., "digest" → runs reader-daily-digest)
+  - Receive formatted responses in Discord
+  - Works from any device (phone, tablet, desktop)
+  - Paired and access-controlled (allowlist policy)
+- **Usage:**
+  - Start Claude Code with: `claude --channels plugin:discord@claude-plugins-official`
+  - Send DM to bot: "digest", "reader digest", etc.
+- **Primary Use Case:** Daily Reader inbox digest accessible from phone
 
 ---
 
