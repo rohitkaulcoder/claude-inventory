@@ -1,0 +1,307 @@
+# Claude Code Inventory & System Documentation
+
+> **Last Updated:** 2026-03-20
+> **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
+
+---
+
+## Table of Contents
+1. [Applications](#applications)
+2. [Automation Systems](#automation-systems)
+3. [Claude Skills](#claude-skills)
+4. [Development Projects](#development-projects)
+5. [Documentation](#documentation)
+6. [Configuration Files](#configuration-files)
+7. [LaunchAgents & Automations](#launchagents--automations)
+8. [Status & Health](#status--health)
+
+---
+
+## Applications
+
+### 1. Readwise Search App
+- **Status:** ✅ Working
+- **Type:** macOS Native Application
+- **Location:** `/Users/rohitkaul/Applications/Readwise Search.app`
+- **Source Code:** `/Users/rohitkaul/Documents/readwise_search/`
+- **Purpose:** Search and manage Readwise highlights with system-wide hotkey access
+- **Key Files:**
+  - `readwise_app.py` - Main application (50KB)
+  - `sync_highlights.py` - Syncs highlights from Readwise API
+  - `search_engine.py` - Search functionality
+  - `highlights_db.json` - Highlights database (31MB)
+- **Documentation:**
+  - `~/Documents/readwise_search/README.md`
+  - `~/Documents/readwise_search/USAGE.md`
+- **LaunchAgent:** `~/Library/LaunchAgents/com.readwise.search.plist`
+- **Dependencies:** Python 3, Readwise API key
+- **Last Modified:** 2024-02-16
+
+---
+
+## Automation Systems
+
+### 1. Podcast Digest Automation
+- **Status:** ⚠️ Partially Working (fetch component has issues)
+- **Type:** Multi-stage automation pipeline
+- **Base Directory:** `/Users/rohitkaul/Projects/podcast-digest/`
+- **Scripts Location:** `/Users/rohitkaul/`
+- **Purpose:** Automatically fetch podcast transcripts, generate digests, and publish to GitHub
+
+#### Components:
+
+**Fetch Stage:**
+- Script: `fetch_podcasts.py`
+- LaunchAgent: `com.rohitkaul.podcast-step1-fetch.plist`
+- Schedule: Daily
+- Status: ⚠️ Not working (API/VPN issues)
+
+**Generate Stage:**
+- Script: `auto_generate_digest.sh`
+- LaunchAgent: `com.rohitkaul.podcast-step2-generate.plist`
+- Status: ✅ Working
+
+**Publish Stage:**
+- Script: `auto_publish_to_github.sh`
+- LaunchAgent: `com.rohitkaul.podcast-step3-publish.plist`
+- Status: ✅ Working
+
+**Health Monitoring:**
+- Script: `podcast_health_check.sh`
+- LaunchAgent: `com.rohitkaul.podcast-health-check.plist`
+- Notifications: `send_notification.sh`
+
+#### Supporting Scripts:
+- `auto_fetch_and_generate_all.sh` - Combined fetch + generate
+- `auto_generate_and_publish.sh` - Combined generate + publish
+- `setup_3step_automation.sh` - Setup script for 3-stage automation
+- `vpn_connect.sh` - VPN connection helper
+
+#### Configuration:
+- `podcasts.json` - Podcast sources and metadata
+- `test_podcasts.json` - Test configuration
+
+#### Documentation:
+- `AUTOMATION_GUIDE.md`
+- `PODCAST_DIGEST_COMPLETE_GUIDE.md`
+- `PODCAST_SETUP_COMPLETE.md`
+- `PODCAST_MAGAZINE_README.md`
+- `TROUBLESHOOTING_GUIDE.md`
+- `MONITORING_GUIDE.md`
+- `VPNSOLUTION.md`
+- `.claude_podcast_magazine_instructions.md`
+
+#### Log Files:
+- `podcast_automation.log`
+- `podcast_fetch.log`
+- `podcast_health_check.log`
+- `podcast_step1_fetch.log`
+- `podcast_step2_generate.log`
+- `podcast_step3_publish.log`
+
+---
+
+## Claude Skills
+
+**Location:** `~/.claude/skills/`
+
+All skills are Readwise-focused and gitignored by default:
+
+1. **book-review** - Draft long-form book reviews from Reader highlights
+2. **build-persona** - Build personalized reading profile from Reader data
+3. **feed-catchup** - Catch up on RSS feed with highlights
+4. **highlight-graph** - Visualize highlights in interactive 2D graph
+5. **now-reading-page** - Generate personal "Now Reading" webpage
+6. **quiz** - Quiz yourself on recently read documents
+7. **reader-recap** - Conversational briefing on recent reading
+8. **readwise-cli** - How to use Readwise CLI
+9. **surprise-me** - Analyze reading history for surprising insights
+10. **triage** - Triage Reader inbox with personalized pitches
+
+---
+
+## Development Projects
+
+### 1. Readwise MCP Server
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/readwise-reader-mcp/`
+- **Type:** Model Context Protocol Server
+- **Purpose:** Enables Claude Code to interact with Readwise Reader API
+- **Language:** Node.js/TypeScript
+
+### 2. Byline
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/Projects/byline/`
+- **Type:** Web Application
+- **Stack:** Astro + Sanity CMS
+- **Purpose:** Personal blog/content site
+- **Deployment:** Vercel
+- **Documentation:** `~/Projects/byline/README.md`
+
+### 3. Podcast Digest
+- **Status:** ⚠️ Partially Working
+- **Location:** `/Users/rohitkaul/Projects/podcast-digest/`
+- **Type:** GitHub-hosted digest
+- **Documentation:**
+  - `~/Projects/podcast-digest/README.md`
+  - `~/Projects/podcast-digest/SETUP.md`
+
+---
+
+## Documentation
+
+### Primary Guides (Home Directory)
+- `AUTOMATION_GUIDE.md` - Overall automation system guide
+- `CRON_JOBS_STATUS.md` - Status of scheduled jobs
+- `MONITORING_GUIDE.md` - How to monitor automations
+- `TROUBLESHOOTING_GUIDE.md` - Common issues and solutions
+- `PODCAST_DIGEST_COMPLETE_GUIDE.md` - Complete podcast workflow
+- `PODCAST_MAGAZINE_README.md` - Magazine generation
+- `PODCAST_SETUP_COMPLETE.md` - Initial setup instructions
+- `VPNSOLUTION.md` - VPN configuration for podcast fetching
+- `fetch_via_browser.md` - Browser-based fetching workaround
+
+### Analysis & Research
+- `webinar_registrant_analysis.md` - Webinar data analysis
+- `webinar_registrant_analysis_filtered.md` - Filtered analysis
+- `wes_kao_newsletters.md` - Wes Kao newsletter compilation
+- `wes_kao_newsletters_complete.md` - Complete compilation
+- `wes_kao_full_text.md` - Full text version
+
+### Hidden Configuration
+- `.claude/CLAUDE.md` - Global Claude Code instructions
+- `.claude_podcast_magazine_instructions.md` - Podcast magazine generation instructions
+
+---
+
+## Configuration Files
+
+### Readwise
+- `.readwise-cli.json` - Readwise CLI configuration (92KB)
+- `.readwise/` - Readwise data directory
+
+### Application Configs
+- `~/Documents/readwise_search/config.json` - Readwise Search app config
+- `~/Projects/podcast-digest/data/` - Podcast data storage
+
+### Shell Scripts
+All automation shell scripts are in home directory (`~/`):
+- `auto_*.sh` - Automation scripts
+- `setup_*.sh` - Setup scripts
+- `podcast_*.sh` - Podcast-specific scripts
+- `send_notification.sh` - macOS notification helper
+- `vpn_connect.sh` - VPN automation
+
+---
+
+## LaunchAgents & Automations
+
+**Location:** `~/Library/LaunchAgents/`
+
+### Readwise
+- `com.readwise.search.plist` - Readwise Search app launcher
+
+### Podcast Automation
+- `com.rohitkaul.podcast-step1-fetch.plist` - Stage 1: Fetch podcasts
+- `com.rohitkaul.podcast-step2-generate.plist` - Stage 2: Generate digest
+- `com.rohitkaul.podcast-step3-publish.plist` - Stage 3: Publish to GitHub
+- `com.rohitkaul.podcast-health-check.plist` - Health monitoring
+- `com.rohitkaul.podcast-full-automation.plist` - Full pipeline (legacy)
+- `com.rohitkaul.podcastfetch.plist` - Simple fetch (legacy)
+
+### Management Commands
+```bash
+# List running LaunchAgents
+launchctl list | grep rohitkaul
+
+# Load/unload specific agent
+launchctl load ~/Library/LaunchAgents/com.rohitkaul.podcast-step1-fetch.plist
+launchctl unload ~/Library/LaunchAgents/com.rohitkaul.podcast-step1-fetch.plist
+
+# Start immediately
+launchctl start com.rohitkaul.podcast-step1-fetch
+```
+
+---
+
+## Status & Health
+
+### Working ✅
+- Readwise Search App
+- Readwise MCP Server
+- Byline website
+- Podcast digest generation (stages 2 & 3)
+- Health check monitoring
+- All Claude Skills
+
+### Partially Working ⚠️
+- Podcast fetching (Stage 1) - API/VPN issues
+- Overall podcast automation pipeline
+
+### Not Working ❌
+- None currently identified
+
+### Known Issues
+1. **Podcast Fetch**: API access issues, possibly VPN-related
+2. **Incremental Indexing**: Readwise app should use incremental indexing (don't rebuild from scratch)
+
+---
+
+## Quick Reference
+
+### Common Tasks
+
+**Check podcast automation status:**
+```bash
+~/podcast_health_check.sh
+```
+
+**Manual podcast fetch:**
+```bash
+python3 ~/fetch_podcasts.py
+```
+
+**View automation logs:**
+```bash
+tail -f ~/podcast_automation.log
+```
+
+**Launch Readwise Search:**
+```bash
+open ~/Applications/Readwise\ Search.app
+```
+
+**Check LaunchAgent status:**
+```bash
+launchctl list | grep rohitkaul
+```
+
+---
+
+## Maintenance Notes
+
+### Regular Checks
+- [ ] Podcast automation logs (weekly)
+- [ ] Readwise highlights sync (monthly)
+- [ ] LaunchAgent status (monthly)
+- [ ] Documentation updates (as needed)
+
+### Backup Locations
+- Podcast data: `~/Projects/podcast-digest/` (Git-backed)
+- Readwise highlights: `~/Documents/readwise_search/highlights_db.json`
+- Scripts: All in `~/` (should be backed up)
+
+---
+
+## Future Improvements
+
+1. Consolidate scattered podcast scripts into Projects directory
+2. Set up proper version control for automation scripts
+3. Implement incremental indexing for Readwise app
+4. Fix podcast fetching API issues
+5. Create central backup strategy
+6. Add comprehensive error handling to all automations
+
+---
+
+**Note:** This inventory should be updated whenever new tools, apps, or automations are created or modified.
