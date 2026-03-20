@@ -156,7 +156,7 @@ All skills are Readwise-focused and gitignored by default:
   - Local inventory: `/Users/rohitkaul/CLAUDE_INVENTORY.md`
   - Sync script: `/Users/rohitkaul/sync_inventory.sh`
   - LaunchAgent: `com.rohitkaul.inventory-sync`
-  - Schedule: Daily sync to GitHub
+  - Schedule: Daily at 9:00 AM (catches up at startup if laptop was off)
 - **Documentation:** `~/INVENTORY_SYNC_GUIDE.md`
 
 ---
