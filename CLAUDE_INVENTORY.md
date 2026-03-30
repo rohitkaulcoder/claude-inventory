@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-03-20
+> **Last Updated:** 2026-03-30
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -160,7 +160,18 @@ All skills are Readwise-focused and gitignored by default:
   - Schedule: Daily at 9:00 AM (catches up at startup if laptop was off)
 - **Documentation:** `~/INVENTORY_SYNC_GUIDE.md`
 
-### 5. Discord Bot Integration
+### 5. Reader Digests Site
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/reader-digests/`
+- **GitHub:** https://github.com/rohitkaulcoder/reader-digests
+- **Live URL:** https://rohitkaulcoder.github.io/reader-digests/
+- **Type:** Jekyll static site on GitHub Pages
+- **Purpose:** Public archive of daily reading digests from Readwise Reader
+- **Stack:** Jekyll, GitHub Pages (legacy build)
+- **Content:** `_digests/` collection with front matter, custom layouts
+- **Setup Date:** 2026-03-29
+
+### 6. Discord Bot Integration
 - **Status:** ✅ Working
 - **Type:** Claude Code Channel Plugin
 - **Purpose:** Trigger Claude Code skills from Discord (phone or desktop)
@@ -268,6 +279,7 @@ launchctl start com.rohitkaul.podcast-step1-fetch
 - Readwise Search App
 - Readwise MCP Server
 - Byline website
+- Reader Digests Site (GitHub Pages)
 - Podcast digest generation (stages 2 & 3)
 - Health check monitoring
 - All Claude Skills
