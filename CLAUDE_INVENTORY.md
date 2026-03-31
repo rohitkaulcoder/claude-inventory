@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-03-30
+> **Last Updated:** 2026-03-31
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -165,11 +165,28 @@ All skills are Readwise-focused and gitignored by default:
 - **Location:** `/Users/rohitkaul/reader-digests/`
 - **GitHub:** https://github.com/rohitkaulcoder/reader-digests
 - **Live URL:** https://rohitkaulcoder.github.io/reader-digests/
-- **Type:** Jekyll static site on GitHub Pages
-- **Purpose:** Public archive of daily reading digests from Readwise Reader
-- **Stack:** Jekyll, GitHub Pages (legacy build)
+- **Type:** Jekyll static site on GitHub Pages + automated email digest
+- **Purpose:** Daily reading digest from Readwise Reader — published to site and emailed
+- **Stack:** Jekyll, GitHub Pages, GitHub Actions, Claude (`claude -p`), `@readwise/cli`, Resend API
+- **Schedule:** Daily at 7:00 AM IST (1:30 UTC) via GitHub Actions cron
+- **Email:** Sent via Resend to `rohit@rohitkaul.com` (from `onboarding@resend.dev`)
+- **Secrets:** `ANTHROPIC_API_KEY`, `READWISE_TOKEN`, `RESEND_API_KEY`
 - **Content:** `_digests/` collection with front matter, custom layouts
-- **Setup Date:** 2026-03-29
+- **Setup Date:** 2026-03-29 (email added 2026-03-30)
+
+### 7. Daily Tech Roundup
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/Projects/daily-tech-roundup/`
+- **GitHub:** https://github.com/rohitkaulcoder/daily-tech-roundup
+- **Type:** Automated email digest
+- **Purpose:** Daily email digest of US tech industry news from 3 podcasts (TBPN, TITV, Techmeme Ride Home)
+- **Stack:** Python, Anthropic API (Sonnet), Resend, GitHub Actions
+- **Schedule:** Weekdays at 7:00 AM IST (1:30 UTC) via GitHub Actions cron
+- **Email:** Sent via Resend to recipient (from `onboarding@resend.dev`)
+- **Secrets:** `ANTHROPIC_API_KEY`, `RESEND_API_KEY`, `GROQ_API_KEY`, `YOUTUBE_API_KEY`, `RECIPIENT_EMAIL`
+- **Cost:** ~$6/month (Anthropic API + Groq Whisper)
+- **Setup Date:** 2026-03-30
+- **Forked from:** podcast-digest
 
 ### 6. Discord Bot Integration
 - **Status:** ✅ Working
