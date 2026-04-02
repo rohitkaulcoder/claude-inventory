@@ -169,11 +169,12 @@ All skills are Readwise-focused and gitignored by default:
 - **Type:** Jekyll static site on GitHub Pages + automated email digest
 - **Purpose:** Daily reading digest from Readwise Reader — published to site and emailed
 - **Stack:** Jekyll, GitHub Pages, GitHub Actions, Claude (`claude -p`), `@readwise/cli`, Resend API
-- **Schedule:** Daily at 7:00 AM IST (1:30 UTC) via GitHub Actions cron
+- **Schedule:** Daily at 7:00 AM IST (1:30 UTC) via cron-job.org → `workflow_dispatch` (GitHub Actions `schedule` trigger still present — pending removal)
 - **Email:** Sent via Resend to `rohit@rohitkaul.com` (from `onboarding@resend.dev`)
 - **Secrets:** `ANTHROPIC_API_KEY`, `READWISE_TOKEN`, `RESEND_API_KEY`
 - **Content:** `_digests/` collection with front matter, custom layouts
 - **Setup Date:** 2026-03-29 (email added 2026-03-30)
+- **Known Issue:** `claude -p` can timeout at 30 minutes; needs increase to 45
 
 ### 7. Daily Tech Roundup
 - **Status:** ✅ Working
@@ -182,7 +183,7 @@ All skills are Readwise-focused and gitignored by default:
 - **Type:** Automated email digest
 - **Purpose:** Daily email digest of US tech industry news from 3 podcasts (TBPN, TITV, Techmeme Ride Home)
 - **Stack:** Python, Anthropic API (Sonnet), Resend, GitHub Actions
-- **Schedule:** Weekdays at 7:00 AM IST (1:30 UTC) via GitHub Actions cron
+- **Schedule:** Weekdays at 7:00 AM IST (1:30 UTC) via cron-job.org → `workflow_dispatch` (GitHub Actions `schedule` trigger removed 2026-04-02)
 - **Email:** Sent via Resend to recipient (from `onboarding@resend.dev`)
 - **Secrets:** `ANTHROPIC_API_KEY`, `RESEND_API_KEY`, `GROQ_API_KEY`, `YOUTUBE_API_KEY`, `RECIPIENT_EMAIL`
 - **Cost:** ~$6/month (Anthropic API + Groq Whisper)
