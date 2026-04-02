@@ -41,10 +41,10 @@
 
 ## Automation Systems
 
-### 1. Podcast Digest Automation
-- **Status:** ⚠️ Partially Working (fetch component has issues)
+### 1. Daily Podcast Roundup
+- **Status:** ✅ Working
 - **Type:** Multi-stage automation pipeline
-- **Base Directory:** `/Users/rohitkaul/Projects/podcast-digest/`
+- **Base Directory:** `/Users/rohitkaul/Projects/daily-podcast-roundup/`
 - **Scripts Location:** `/Users/rohitkaul/`
 - **Purpose:** Automatically fetch podcast transcripts, generate digests, and publish to GitHub
 
@@ -140,13 +140,13 @@ All skills are Readwise-focused and gitignored by default:
 - **Deployment:** Vercel
 - **Documentation:** `~/Projects/byline/README.md`
 
-### 3. Podcast Digest
-- **Status:** ⚠️ Partially Working
-- **Location:** `/Users/rohitkaul/Projects/podcast-digest/`
-- **Type:** GitHub-hosted digest
+### 3. Daily Podcast Roundup
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/Projects/daily-podcast-roundup/`
+- **Type:** GitHub-hosted digest + Readwise highlights pipeline
 - **Documentation:**
-  - `~/Projects/podcast-digest/README.md`
-  - `~/Projects/podcast-digest/SETUP.md`
+  - `~/Projects/daily-podcast-roundup/README.md`
+  - `~/Projects/daily-podcast-roundup/SETUP.md`
 
 ### 4. Inventory Sync System
 - **Status:** ✅ Working
@@ -168,13 +168,14 @@ All skills are Readwise-focused and gitignored by default:
 - **Live URL:** https://rohitkaulcoder.github.io/reader-digests/
 - **Type:** Jekyll static site on GitHub Pages + automated email digest
 - **Purpose:** Daily reading digest from Readwise Reader — published to site and emailed
-- **Stack:** Jekyll, GitHub Pages, GitHub Actions, Claude (`claude -p`), `@readwise/cli`, Resend API
-- **Schedule:** Daily at 7:00 AM IST (1:30 UTC) via cron-job.org → `workflow_dispatch` (GitHub Actions `schedule` trigger removed 2026-04-02)
+- **Stack:** Jekyll, GitHub Pages, GitHub Actions, Claude (`claude -p` Sonnet + Haiku), `@readwise/cli`, Resend API
+- **Schedule:** Daily at 7:00 AM IST (1:30 UTC) via cron-job.org → `workflow_dispatch`
+- **Pipeline:** 3-stage: Haiku triage (top 10) → Sonnet per-article analysis (isolated calls) → Haiku assembly
+- **Source:** Readwise Reader **feed only** (no library/later)
 - **Email:** Sent via Resend to `rohit@rohitkaul.com` (from `onboarding@resend.dev`)
+- **Cost:** ~$1.03/run (~$30/month) — optimized 2026-04-02 from $8.35/run
 - **Secrets:** `ANTHROPIC_API_KEY`, `READWISE_TOKEN`, `RESEND_API_KEY`
-- **Content:** `_digests/` collection with front matter, custom layouts
-- **Setup Date:** 2026-03-29 (email added 2026-03-30)
-- **Known Issue:** `claude -p` can timeout at 30 minutes; needs increase to 45
+- **Setup Date:** 2026-03-29 (pipeline optimized 2026-04-02)
 
 ### 7. Daily Tech Roundup
 - **Status:** ✅ Working
@@ -188,7 +189,7 @@ All skills are Readwise-focused and gitignored by default:
 - **Secrets:** `ANTHROPIC_API_KEY`, `RESEND_API_KEY`, `GROQ_API_KEY`, `YOUTUBE_API_KEY`, `RECIPIENT_EMAIL`
 - **Cost:** ~$6/month (Anthropic API + Groq Whisper)
 - **Setup Date:** 2026-03-30
-- **Forked from:** podcast-digest
+- **Forked from:** daily-podcast-roundup
 
 ### 6. Discord Bot Integration
 - **Status:** ✅ Working
@@ -247,7 +248,7 @@ All skills are Readwise-focused and gitignored by default:
 
 ### Application Configs
 - `~/Documents/readwise_search/config.json` - Readwise Search app config
-- `~/Projects/podcast-digest/data/` - Podcast data storage
+- `~/Projects/daily-podcast-roundup/data/` - Podcast data storage
 
 ### Shell Scripts
 All automation shell scripts are in home directory (`~/`):
@@ -356,7 +357,7 @@ launchctl list | grep rohitkaul
 - [ ] Documentation updates (as needed)
 
 ### Backup Locations
-- Podcast data: `~/Projects/podcast-digest/` (Git-backed)
+- Podcast data: `~/Projects/daily-podcast-roundup/` (Git-backed)
 - Readwise highlights: `~/Documents/readwise_search/highlights_db.json`
 - Scripts: All in `~/` (should be backed up)
 
