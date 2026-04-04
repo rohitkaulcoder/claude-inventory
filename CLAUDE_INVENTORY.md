@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-04-02
+> **Last Updated:** 2026-04-04
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -176,6 +176,34 @@ All skills are Readwise-focused and gitignored by default:
 - **Cost:** ~$1.03/run (~$30/month) — optimized 2026-04-02 from $8.35/run
 - **Secrets:** `ANTHROPIC_API_KEY`, `READWISE_TOKEN`, `RESEND_API_KEY`
 - **Setup Date:** 2026-03-29 (pipeline optimized 2026-04-02)
+
+### 8. Reya's Timetable Email
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/Projects/reya-timetable/`
+- **GitHub:** https://github.com/rohitkaulcoder/reya-timetable
+- **Type:** Automated daily email
+- **Purpose:** Sends Reya's school timetable (8 SARISKA, Shiv Nadar School, Noida) daily at 8 PM IST
+- **Stack:** Python, Resend, GitHub Actions
+- **Schedule:** Daily at 8:00 PM IST (14:30 UTC) except Saturday, via cron-job.org → `workflow_dispatch`
+- **Logic:** Mon-Thu: today + tomorrow; Friday: Friday only; Sunday: Monday only
+- **Email:** Sent via Resend to rohit@rohitkaul.com (from `onboarding@resend.dev`)
+- **Secrets:** `RESEND_API_KEY`, `RECIPIENT_EMAIL`
+- **Cost:** Free (Resend free tier)
+- **Setup Date:** 2026-04-03
+
+### 9. Rihaan's Timetable Email
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/Projects/rihaan-timetable/`
+- **GitHub:** https://github.com/rohitkaulcoder/rihaan-timetable
+- **Type:** Automated daily email
+- **Purpose:** Sends Rihaan's school timetable (Grade II Kanha EY, Shiv Nadar School, Noida) daily at 8 PM IST
+- **Stack:** Python, Resend, GitHub Actions
+- **Schedule:** Daily at 8:00 PM IST (14:30 UTC) except Saturday, via cron-job.org → `workflow_dispatch`
+- **Logic:** Mon-Thu: today + tomorrow; Friday: Friday only; Sunday: Monday only
+- **Email:** Sent via Resend to rohit@rohitkaul.com (from `onboarding@resend.dev`)
+- **Secrets:** `RESEND_API_KEY`, `RECIPIENT_EMAIL`
+- **Cost:** Free (Resend free tier)
+- **Setup Date:** 2026-04-03
 
 ### 7. Daily Tech Roundup
 - **Status:** ✅ Working
