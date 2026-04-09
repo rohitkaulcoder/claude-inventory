@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-04-08
+> **Last Updated:** 2026-04-09
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -118,7 +118,7 @@ All skills are Readwise-focused and gitignored by default:
 9. **readwise-cli** - How to use Readwise CLI
 10. **surprise-me** - Analyze reading history for surprising insights
 11. **triage** - Triage Reader inbox with personalized pitches
-12. **notebooklm-import** - Batch-import NotebookLM exports (audio + PDFs) from a folder → transcribe audio (Groq Whisper), save all docs to Reader, generate highlights → push to Readwise. Folder name format: `Title - Author`. Tracks processed files via `processed.json`.
+12. **notebooklm-import** - Batch-import NotebookLM exports (audio + PDFs) from a folder → transcribe audio (Groq Whisper), save all docs to Reader, generate highlights → push to Readwise. Also generates an **Alpha Brief** — a layered-depth synthesis document (3 zoom levels) pushed to Reader. Folder name format: `Title - Author`. Tracks processed files via `processed.json`. Caches transcripts as `.txt` sidecar files.
 
 ---
 
