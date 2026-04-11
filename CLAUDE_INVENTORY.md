@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-04-10
+> **Last Updated:** 2026-04-11
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -119,6 +119,7 @@ All skills are Readwise-focused and gitignored by default:
 10. **surprise-me** - Analyze reading history for surprising insights
 11. **triage** - Triage Reader inbox with personalized pitches
 12. **notebooklm-import** - Batch-import NotebookLM exports (audio + PDFs) from a folder → transcribe audio (Groq Whisper), save all docs to Reader, generate highlights → push to Readwise. Also generates an **Alpha Brief** — a layered-depth synthesis document (3 zoom levels) pushed to Reader. Folder name format: `Title - Author`. Tracks processed files via `processed.json`. Caches transcripts as `.txt` sidecar files.
+13. **alpha-interview** - Editorial compression of interview/podcast transcripts. Fetches a document from Reader, cuts banter/filler/housekeeping, tightens circular answers while preserving first-person voice and original questions, saves back as "Alpha - [Title]" with tag "Alpha".
 
 ---
 
