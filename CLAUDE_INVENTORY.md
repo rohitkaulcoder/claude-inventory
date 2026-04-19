@@ -51,20 +51,27 @@
 #### Components:
 
 **Fetch Stage:**
-- Script: `fetch_podcasts.py`
+- Script: `scripts/fetch_podcasts.py`
 - LaunchAgent: `com.rohitkaul.podcast-step1-fetch.plist`
-- Schedule: Daily
-- Status: ⚠️ Not working (API/VPN issues)
+- Schedule: Daily at 5:00 PM
+- Status: ✅ Working (Groq Whisper transcription)
 
-**Generate Stage:**
+**Readwise Push Stage (primary output):**
+- Script: `scripts/push_to_readwise.py`
+- Wrapper: `~/auto_push_readwise.sh`
+- LaunchAgent: `com.rohitkaul.podcast-step2b-readwise.plist`
+- Schedule: Daily at 5:15 PM (after fetch)
+- Status: ✅ Working
+
+**Generate Stage (legacy):**
 - Script: `auto_generate_digest.sh`
 - LaunchAgent: `com.rohitkaul.podcast-step2-generate.plist`
-- Status: ✅ Working
+- Status: ✅ Working (legacy, not primary output)
 
-**Publish Stage:**
+**Publish Stage (legacy):**
 - Script: `auto_publish_to_github.sh`
 - LaunchAgent: `com.rohitkaul.podcast-step3-publish.plist`
-- Status: ✅ Working
+- Status: ✅ Working (legacy, not primary output)
 
 **Health Monitoring:**
 - Script: `podcast_health_check.sh`
@@ -107,19 +114,20 @@
 
 All skills are Readwise-focused and gitignored by default:
 
-1. **reader-daily-digest** ⭐ NEW - Generate daily digest of inbox with deep insights and quotes (Discord-accessible)
+1. **reader-daily-digest** - Generate daily digest of inbox with deep insights and quotes (Discord-accessible)
 2. **book-review** - Draft long-form book reviews from Reader highlights
 3. **build-persona** - Build personalized reading profile from Reader data
 4. **feed-catchup** - Catch up on RSS feed with highlights
-5. **highlight-graph** - Visualize highlights in interactive 2D graph
-6. **now-reading-page** - Generate personal "Now Reading" webpage
-7. **quiz** - Quiz yourself on recently read documents
-8. **reader-recap** - Conversational briefing on recent reading
-9. **readwise-cli** - How to use Readwise CLI
-10. **surprise-me** - Analyze reading history for surprising insights
-11. **triage** - Triage Reader inbox with personalized pitches
-12. **notebooklm-import** - Batch-import NotebookLM exports (audio + PDFs) from a folder → transcribe audio (Groq Whisper), save all docs to Reader, generate highlights → push to Readwise. Also generates an **Alpha Brief** — a layered-depth synthesis document (3 zoom levels) pushed to Reader. Folder name format: `Title - Author`. Tracks processed files via `processed.json`. Caches transcripts as `.txt` sidecar files.
-13. **alpha-interview** - Editorial compression of interview/podcast transcripts. Fetches a document from Reader, cuts banter/filler/housekeeping, tightens circular answers while preserving first-person voice and original questions, saves back as "Alpha - [Title]" with tag "Alpha".
+5. **follow-builders** - AI builders digest — monitors top AI builders on X and YouTube podcasts, remixes into digestible summaries
+6. **highlight-graph** - Visualize highlights in interactive 2D graph
+7. **now-reading-page** - Generate personal "Now Reading" webpage
+8. **quiz** - Quiz yourself on recently read documents
+9. **reader-recap** - Conversational briefing on recent reading
+10. **readwise-cli** - How to use Readwise CLI
+11. **surprise-me** - Analyze reading history for surprising insights
+12. **triage** - Triage Reader inbox with personalized pitches
+13. **notebooklm-import** - Batch-import NotebookLM exports (audio + PDFs) from a folder → transcribe audio (Groq Whisper), save all docs to Reader, generate highlights → push to Readwise. Also generates an **Alpha Brief** — a layered-depth synthesis document (3 zoom levels) pushed to Reader. Folder name format: `Title - Author`. Tracks processed files via `processed.json`. Caches transcripts as `.txt` sidecar files.
+14. **alpha-interview** - Editorial compression of interview/podcast transcripts. Fetches a document from Reader, cuts banter/filler/housekeeping, tightens circular answers while preserving first-person voice and original questions, saves back as "Alpha - [Title]" with tag "Alpha".
 
 ---
 
@@ -220,6 +228,27 @@ All skills are Readwise-focused and gitignored by default:
 - **Setup Date:** 2026-03-30
 - **Forked from:** daily-podcast-roundup
 
+### 10. Podcast Highlights Feed
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/Projects/podcast-feed/`
+- **Type:** Web Application
+- **Stack:** Next.js 15 (App Router), Tailwind, Vercel
+- **Live URL:** https://podcast-feed.vercel.app
+- **Purpose:** Reels-style card feed of podcast highlights with star/dismiss, sourced from Readwise
+- **Features:** Snap-scroll feed, source & topic filters, quality-scored card ordering, localStorage state
+- **Data:** 6,500+ blurbs in `public/data/blurbs.json`, generated via `claude -p`
+- **Pending:** Vercel KV for cross-device sync
+- **Setup Date:** 2026-03
+
+### 11. Granola Export
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/Projects/granola-export/`
+- **Type:** Utility script
+- **Purpose:** Export all Granola meeting transcripts to Markdown files
+- **Script:** `export_granola.py` — reads auth tokens from local Granola app, fetches all documents via API
+- **Output:** `transcripts/` directory (~715 files)
+- **Setup Date:** 2026-04
+
 ### 6. Discord Bot Integration
 - **Status:** ✅ Working
 - **Type:** Claude Code Channel Plugin
@@ -297,9 +326,10 @@ All automation shell scripts are in home directory (`~/`):
 - `com.readwise.search.plist` - Readwise Search app launcher
 
 ### Podcast Automation
-- `com.rohitkaul.podcast-step1-fetch.plist` - Stage 1: Fetch podcasts
-- `com.rohitkaul.podcast-step2-generate.plist` - Stage 2: Generate digest
-- `com.rohitkaul.podcast-step3-publish.plist` - Stage 3: Publish to GitHub
+- `com.rohitkaul.podcast-step1-fetch.plist` - Stage 1: Fetch podcasts (5:00 PM)
+- `com.rohitkaul.podcast-step2b-readwise.plist` - Stage 2b: Push highlights to Readwise (5:15 PM) ← primary output
+- `com.rohitkaul.podcast-step2-generate.plist` - Stage 2: Generate HTML digest (legacy)
+- `com.rohitkaul.podcast-step3-publish.plist` - Stage 3: Publish to GitHub (legacy)
 - `com.rohitkaul.podcast-health-check.plist` - Health monitoring
 - `com.rohitkaul.podcast-full-automation.plist` - Full pipeline (legacy)
 - `com.rohitkaul.podcastfetch.plist` - Simple fetch (legacy)
@@ -329,19 +359,20 @@ launchctl start com.rohitkaul.podcast-step1-fetch
 - Readwise MCP Server
 - Byline website
 - Reader Digests Site (GitHub Pages)
-- Podcast digest generation (stages 2 & 3)
+- Podcast roundup — full pipeline (fetch + Readwise push)
+- Podcast Highlights Feed (Vercel)
 - Health check monitoring
-- All Claude Skills
-
-### Partially Working ⚠️
-- Podcast fetching (Stage 1) - API/VPN issues
-- Overall podcast automation pipeline
+- All 14 Claude Skills
+- Reya & Rihaan timetable emails
+- Daily Tech Roundup
+- Granola Export
+- Discord Bot Integration
 
 ### Not Working ❌
 - None currently identified
 
 ### Known Issues
-1. **Podcast Fetch**: API access issues, possibly VPN-related
+1. **LaunchAgent reboot persistence**: Podcast LaunchAgents have `RunAtLoad: false` and get unloaded after macOS reboots. Must manually `launchctl load` them. Has happened at least twice (2026-04-02, 2026-04-19). Consider setting `RunAtLoad: true`.
 2. **Incremental Indexing**: Readwise app should use incremental indexing (don't rebuild from scratch)
 
 ---
@@ -397,9 +428,9 @@ launchctl list | grep rohitkaul
 1. Consolidate scattered podcast scripts into Projects directory
 2. Set up proper version control for automation scripts
 3. Implement incremental indexing for Readwise app
-4. Fix podcast fetching API issues
+4. Set `RunAtLoad: true` on podcast LaunchAgents to survive reboots
 5. Create central backup strategy
-6. Add comprehensive error handling to all automations
+6. Podcast Feed: add Vercel KV for cross-device sync
 
 ---
 
