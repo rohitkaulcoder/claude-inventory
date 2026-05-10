@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-04-19
+> **Last Updated:** 2026-05-10
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -219,14 +219,15 @@ All skills are Readwise-focused and gitignored by default:
 - **Location:** `/Users/rohitkaul/Projects/daily-tech-roundup/`
 - **GitHub:** https://github.com/rohitkaulcoder/daily-tech-roundup
 - **Type:** Automated email digest
-- **Purpose:** Daily email digest of US tech industry news from 3 podcasts (TBPN, TITV, Techmeme Ride Home)
-- **Stack:** Python, Anthropic API (Sonnet), Resend, GitHub Actions
+- **Purpose:** Daily email digest of US tech industry news from 3 sources (TBPN, TITV, MTS Live)
+- **Stack:** Python, Anthropic API (Sonnet), Resend, GitHub Actions, yt-dlp + Groq Whisper
 - **Schedule:** Weekdays at 7:00 AM IST (1:30 UTC) via cron-job.org → `workflow_dispatch` (GitHub Actions `schedule` trigger removed 2026-04-02)
 - **Email:** Sent via Resend to recipient (from `onboarding@resend.dev`)
 - **Secrets:** `ANTHROPIC_API_KEY`, `RESEND_API_KEY`, `GROQ_API_KEY`, `YOUTUBE_API_KEY`, `RECIPIENT_EMAIL`
 - **Cost:** ~$6/month (Anthropic API + Groq Whisper)
 - **Setup Date:** 2026-03-30
 - **Forked from:** daily-podcast-roundup
+- **Last source change:** 2026-05-10 — replaced Techmeme Ride Home with MTS Live ([@mtsituation](https://www.youtube.com/@mtsituation)). YouTube-only sources use yt-dlp to download audio → Groq Whisper, gated by `youtube_channel_id` in CHANNELS config and filtered to "Best Of" videos.
 
 ### 10. Podcast Highlights Feed
 - **Status:** ✅ Working
