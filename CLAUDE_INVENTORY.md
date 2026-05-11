@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-05-10
+> **Last Updated:** 2026-05-11
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -128,6 +128,7 @@ All skills are Readwise-focused and gitignored by default:
 12. **triage** - Triage Reader inbox with personalized pitches
 13. **notebooklm-import** - Batch-import NotebookLM exports (audio + PDFs) from a folder → transcribe audio (Groq Whisper), save all docs to Reader, generate highlights → push to Readwise. Also generates an **Alpha Brief** — a layered-depth synthesis document (3 zoom levels) pushed to Reader. Folder name format: `Title - Author`. Tracks processed files via `processed.json`. Caches transcripts as `.txt` sidecar files.
 14. **alpha-interview** - Editorial compression of interview/podcast transcripts. Fetches a document from Reader, cuts banter/filler/housekeeping, tightens circular answers while preserving first-person voice and original questions, saves back as "Alpha - [Title]" with tag "Alpha".
+15. **gemini** - Route a question to Google's Gemini via `gemini -p` for a second opinion, fact-check, or independent code review. Uses Gemini CLI (`@google/gemini-cli`, installed at `~/.npm-global/bin/gemini`). Headless only — image generation explicitly out of scope (CLI produces empty PNGs; use Gemini API directly with `gemini-2.5-flash-image` for Nano Banana). Always call serially; parallel calls hang.
 
 ---
 
