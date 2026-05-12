@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-05-11
+> **Last Updated:** 2026-05-12
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -317,6 +317,20 @@ All automation shell scripts are in home directory (`~/`):
 - `podcast_*.sh` - Podcast-specific scripts
 - `send_notification.sh` - macOS notification helper
 - `vpn_connect.sh` - VPN automation
+
+---
+
+## CLI Tools
+
+Installed globally and available on PATH:
+
+- **readwise** (`~/.npm-global/bin/readwise`, v0.5.4) — Readwise CLI for accessing highlights, documents, and Reader library. Skill: `readwise-cli`.
+- **gemini** (`~/.npm-global/bin/gemini`, v0.41.2) — Google Gemini CLI. Auth: OAuth as `rohit@rohitkaul.com` + Gemini API key set in `~/.zshrc` as `NANOBANANA_API_KEY` / `GEMINI_API_KEY`. Skill: `gemini` (text only — image gen blocked by zero free-tier quota; needs API billing enabled to use Nano Banana). Nano Banana extension installed at `~/.gemini/extensions/nanobanana/`.
+- **apify** (`/opt/homebrew/bin/apify`, v1.6.1, installed via Homebrew) — Apify CLI for running scrapers/actors and managing Apify projects. Logged in as `express_heron`. Note: `npm install -g apify-cli` fails due to pnpm postinstall dependency — use Homebrew.
+- **yt-dlp** (`/opt/homebrew/bin/yt-dlp`, v2026.03.03, installed via Homebrew) — Download videos/audio from YouTube and 1000+ other sites. Useful for grabbing podcast episodes, extracting audio for transcription pipelines, archiving clips.
+- **ffmpeg** (`/opt/homebrew/bin/ffmpeg`, v8.1, installed via Homebrew) — Audio/video conversion, trimming, transcoding. Pairs naturally with yt-dlp for audio extraction and with Whisper/Groq for transcription pipelines.
+- **claude** — Claude Code itself.
+- **gh** — GitHub CLI for repo/PR/issue management.
 
 ---
 
