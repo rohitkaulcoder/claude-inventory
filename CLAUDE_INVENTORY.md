@@ -1,6 +1,6 @@
 # Claude Code Inventory & System Documentation
 
-> **Last Updated:** 2026-05-19
+> **Last Updated:** 2026-05-20
 > **Purpose:** Central registry of all apps, tools, automations, and documentation built with Claude Code
 
 ---
@@ -242,6 +242,35 @@ All skills are Readwise-focused and gitignored by default:
 - **Pending:** Vercel KV for cross-device sync
 - **Setup Date:** 2026-03
 
+### 12. VC Feed Daily Digest
+- **Status:** ✅ Working
+- **Location:** `/Users/rohitkaul/Projects/vc-feed/`
+- **GitHub:** https://github.com/rohitkaulcoder/vc-feed
+- **Type:** Automated email digest
+- **Purpose:** Daily AI-curated digest of ~45 hand-picked VC/LP voices on X
+- **Stack:** Python, Supabase Postgres (Mumbai), Apify (`xquik/x-tweet-scraper`), Anthropic (Haiku 4.5 enrichment + Sonnet 4.5 intro), Resend, GitHub Actions
+- **Schedule:** Daily at 7:00 AM IST (1:30 UTC) via cron-job.org → `workflow_dispatch`
+- **Email:** Sent via Resend to `rohit@rohitkaul.com` (from `onboarding@resend.dev`)
+- **Trigger PAT:** `cron-job-trigger` fine-grained PAT (now scoped to all repos as of 2026-05-19)
+- **Secrets in GitHub:** `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `ANTHROPIC_API_KEY`, `RESEND_API_KEY`, `APIFY_TOKEN`, `VCFEED_RECIPIENT`
+- **Data sources:**
+  - 47 curated X handles at `Documents/Cowork/VC News/x-feed-list.csv` (45 active; HunterWalk + vaibhavbetter marked inactive)
+  - ~12,000 backfilled tweets in Supabase `posts` table (250/handle day-0)
+- **Pipeline (in `scripts/`):**
+  1. `backfill.py` — incremental tweet ingestion via Apify HTTP API (since-date filter from `MAX(posted_at)` per handle, 6h overlap buffer)
+  2. `enrich.py` — Claude Haiku classifies each post (work/personal/banter/news_pointer), tags theme, generates 1-sentence core_claim, scores importance 1-5
+  3. `digest.py` — pulls last 24h of work-classified posts, applies firehose filter (TurnerNovak + HarryStebbings only at importance ≥ 3), drops Misc/Portfolio themes, asks Sonnet for "Top 5" with why-this-matters, renders 3-section HTML
+- **3-section format:** ⭐ The 5 (full read, Sonnet picks) → 📌 Worth a click (importance ≥3 one-liners) → 📋 Everything else (compact index)
+- **Cost:** ~$10-15/month (Apify ~$1/mo, Anthropic ~$3-5/mo, Resend + Supabase free tiers)
+- **Day-0 backfill spend (one-time, 2026-05-19):** Apify $1.55 + Anthropic ~$2.50 enrichment = ~$4
+- **Manual trigger:** `~/Projects/vc-feed/scripts/run_daily.sh` (requires env vars in shell)
+- **Setup Date:** 2026-05-11 (storage + ingest) → 2026-05-19 (enrichment + digest + GH Actions + cron-job.org)
+- **Key learning:** xquik actor at $0.15/1k tweets is the right choice; `apidojo/twitter-user-scraper` and `xtdata/twitter-x-user-info-scraper` both have hidden costs/plan-gates
+- **Caveats:**
+  - Anthropic API 529 overload events occasionally cause batch failures during enrichment — failed posts remain `enriched_at IS NULL` and get picked up on next run automatically
+  - PostgREST aggregates disabled by default in Supabase (worked around with per-handle top-1 queries)
+  - URL-encode timestamp params for PostgREST: `+00:00` → `Z` suffix
+
 ### 11. Granola Export
 - **Status:** ✅ Working
 - **Location:** `/Users/rohitkaul/Projects/granola-export/`
@@ -329,6 +358,7 @@ Installed globally and available on PATH:
 - **apify** (`/opt/homebrew/bin/apify`, v1.6.1, installed via Homebrew) — Apify CLI for running scrapers/actors and managing Apify projects. Logged in as `express_heron`. Note: `npm install -g apify-cli` fails due to pnpm postinstall dependency — use Homebrew.
 - **yt-dlp** (`/opt/homebrew/bin/yt-dlp`, v2026.03.03, installed via Homebrew) — Download videos/audio from YouTube and 1000+ other sites. Useful for grabbing podcast episodes, extracting audio for transcription pipelines, archiving clips.
 - **ffmpeg** (`/opt/homebrew/bin/ffmpeg`, v8.1, installed via Homebrew) — Audio/video conversion, trimming, transcoding. Pairs naturally with yt-dlp for audio extraction and with Whisper/Groq for transcription pipelines.
+- **supabase** (`/opt/homebrew/bin/supabase`, v2.98.2, installed via Homebrew) — Supabase CLI for project management, schema migrations, db push/pull. Auth token in `~/.zshrc` as `SUPABASE_ACCESS_TOKEN`. Linked to `vc-feed` and `FoodToob` projects.
 - **claude** — Claude Code itself.
 - **gh** — GitHub CLI for repo/PR/issue management.
 
